@@ -1,8 +1,3 @@
-// import '@testing-library/jest-dom'; 
-
-// import { configure } from '@testing-library/react';
-
-// configure({ testIdAttribute: 'data-test-id' });
 
 import { enableFetchMocks } from "jest-fetch-mock";
 import "@testing-library/jest-dom";
