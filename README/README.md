@@ -93,6 +93,15 @@ bash
 npm run dev
 bash
 
+//There is a warning message like the one below, edit when testing only
+   We detected TypeScript in your project and reconfigured your tsconfig.json file for you.
+   The following mandatory changes were made to your tsconfig.json:
+
+        - jsx was set to preserve (next.js implements its own optimized jsx transform)
+
+To test copy   "jsx": "react-jsx", to line 18 of tsconfig.json file. Then run npm test in the powershell or bash terminal
+
+
 This will start the development server, and you can access the application in your web browser at
 <http://localhost:3000>.
 typescript

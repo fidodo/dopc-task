@@ -3,7 +3,7 @@ const config = {
   testEnvironment: "jsdom",
   setupFilesAfterEnv: ["<rootDir>/setupTests.ts"],
   transform: {
-    "^.+\\.tsx?$": "ts-jest",
+    "^.+\\.(ts|tsx)$": "ts-jest",
   },
   moduleNameMapper: {
     "\\.(css|scss)$": "identity-obj-proxy", // Mock CSS modules
