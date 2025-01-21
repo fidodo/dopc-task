@@ -1,7 +1,10 @@
-export default function calculateDistance(lat1, lon1, lat2, lon2) {
+export default function calculateDistance( lat1: number | string,
+  lon1: number | string,
+  lat2: number | string,
+  lon2: number | string) {
   console.log("oooo",lat1, lon1, lat2, lon2);
   console.log(typeof lat1, typeof lon1, typeof lat2, typeof lon2);
-    const toRadians = (deg) => (deg * Math.PI) / 180;
+    const toRadians = (deg: number) => (deg * Math.PI) / 180;
 
     lat1 = Number(lat1);
 lon1 = Number(lon1);

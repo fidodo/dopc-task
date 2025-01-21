@@ -20,6 +20,9 @@ export const calculateLongLang =({
 }) => {
 console.log( name, venue)
 console.log(coordinates[1], coordinates[0])
+if (coordinates.length < 2) {
+    throw new Error('Coordinates array must have at least two elements');
+}
 function normalizeString(str: string) {
     return str.toLowerCase().replace(/[^a-z0-9]/g, "");
   }
