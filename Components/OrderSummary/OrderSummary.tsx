@@ -38,29 +38,29 @@ const OrderSummary: React.FC<SummaryProps> = ({ summary, dynamicData }) => {
       <p>
         <strong>Cart Value:</strong>{" "}
         <span data-raw-value={summary.cartValue * 100}  className="text-gray-700">
-          {summary.cartValue.toFixed(2)} EUR
+          {Number(summary.cartValue.toFixed(2))} EUR
         </span>
       </p>
       <p>
         <strong>Small Order Surcharge:</strong>{" "}
-        <span data-raw-value={summary.smallOrderSurcharge * 100}  className="text-gray-700">
-          {summary.smallOrderSurcharge.toFixed(2)} EUR
+        <span data-raw-value={summary.smallOrderSurcharge }  className="text-gray-700">
+          {Number(summary.smallOrderSurcharge.toFixed(2)) / 100} EUR
         </span>
       </p>
       <p>
         <strong>Delivery Fee:</strong>{" "}
-        <span data-raw-value={summary.deliveryFee * 100}  className="text-gray-700">
-          {summary.deliveryFee.toFixed(2)} EUR
+        <span data-raw-value={summary.deliveryFee}  className="text-gray-700">
+          {Number(summary.deliveryFee.toFixed(2)) / 100} EUR
         </span>
       </p>
       <p>
         <strong>Delivery Distance:</strong>{" "}
-        <span data-raw-value={summary.deliveryDistance}  className="text-gray-700">{summary.deliveryDistance.toFixed(2)} m</span>
+        <span data-raw-value={summary.deliveryDistance}  className="text-gray-700">{summary.deliveryDistance.toFixed(2) } m</span>
       </p>
       <p>
         <strong>Total Price:</strong>{" "}
-        <span data-raw-value={summary.totalPrice * 100}>
-          {Number(summary.totalPrice).toFixed(2)} EUR
+        <span data-raw-value={summary.totalPrice}>
+          {(summary.totalPrice.toFixed(2)) } EUR
         </span>
       </p>
     </div>

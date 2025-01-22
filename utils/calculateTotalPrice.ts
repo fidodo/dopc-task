@@ -4,6 +4,6 @@ export default function calculateTotalPrice(
   smallOrderSurcharge: number
 ): number {
   console.log(cartValue, deliveryFee, smallOrderSurcharge);
-  return cartValue + deliveryFee + smallOrderSurcharge;
+  return cartValue + deliveryFee/100 + smallOrderSurcharge/100;
 }
   

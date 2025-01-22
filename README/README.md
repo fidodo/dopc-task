@@ -93,6 +93,22 @@ bash
 npm run dev
 bash
 
+how to test
+use "home-assignment-venue-helsinki" in the venue slug,
+Add cartvalue, it could be any number but not 0,
+click on get location, the longititude and latitude value of this location will be gotten from the api. 
+then click calculate delivery price.
+
+In order to change the distance of customer to the store address(home-assignment-venue-helsinki)
+
+For more test, Change the values of in line 87 and 88 of orderDetails.ts into another longititude and latitude values. the presenlty used values are: 
+const customerVenueLat = 60.182114;
+const customerVenueLon = 24.928135;
+the delivery distance and delivery price is calculated based on this value. You can change it to any other longititude and latitude values to test the application.
+for example you can change it to
+const customerVenueLat = 60.17012133;
+const customerVenueLon = 24.92813502;
+
 
 
 This will start the development server, and you can access the application in your web browser at

@@ -86,6 +86,8 @@ export default function calculateOrderDetails(
 
   const customerVenueLat = 60.182114;
   const customerVenueLon = 24.928135;
+//   const customerVenueLat = 60.17012133;
+// const customerVenueLon = 24.92813502;
   const userLat = Number(addCartValueToDynamicData.staticData.venue_raw.location.coordinates[1]);
   const userLon = Number(addCartValueToDynamicData.staticData.venue_raw.location.coordinates[0]);
   const deliveryDistance = calculateDistance(userLat, userLon, customerVenueLat, customerVenueLon);
