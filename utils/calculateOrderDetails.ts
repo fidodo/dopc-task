@@ -72,6 +72,8 @@ interface AddCartValueToDynamicData {
   staticData: StaticData;
   dynamicData: DynamicData;
   cartValue: string | number;
+  userLatitude: string | number;
+  userLongitude: string | number;
 }
 
 export default function calculateOrderDetails(
@@ -84,13 +86,11 @@ export default function calculateOrderDetails(
 } {
   console.log(addCartValueToDynamicData);
 
-  const customerVenueLat = 60.182114;
-  const customerVenueLon = 24.928135;
-//   const customerVenueLat = 60.17012133;
-// const customerVenueLon = 24.92813502;
-  const userLat = Number(addCartValueToDynamicData.staticData.venue_raw.location.coordinates[1]);
-  const userLon = Number(addCartValueToDynamicData.staticData.venue_raw.location.coordinates[0]);
-  const deliveryDistance = calculateDistance(userLat, userLon, customerVenueLat, customerVenueLon);
+const myLocationLat = Number(addCartValueToDynamicData.userLatitude);
+  const myLocationLon = Number(addCartValueToDynamicData.userLongitude);
+  const venueLat = Number(addCartValueToDynamicData.staticData.venue_raw.location.coordinates[1]);
+  const venueLon = Number(addCartValueToDynamicData.staticData.venue_raw.location.coordinates[0]);
+  const deliveryDistance = calculateDistance(venueLat, venueLon, myLocationLat, myLocationLon);
   const cartValue = Number(addCartValueToDynamicData.cartValue);
 
   console.log(cartValue);
@@ -107,7 +107,7 @@ export default function calculateOrderDetails(
   console.log(smallOrderSurcharge);
   console.log(orderMinimum, cartValue);
   console.log(deliveryDistance);
-  console.log(customerVenueLat, customerVenueLon, userLat, userLon);
+  console.log(myLocationLat, myLocationLon, venueLat, venueLon);
 
   // Calculate delivery fee
   const deliveryFee = calculateDeliveryFee(deliveryDistance, base_price, distance_ranges);

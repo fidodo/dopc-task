@@ -35,6 +35,8 @@ const App: React.FC = () => {
     console.log("formData",formData)
     const addCartValueToDynamicData = {
       cartValue: (data.cartValue),
+      userLatitude: data.userLatitude,
+      userLongitude: data.userLongitude,
       dynamicData,
       staticData
   }
@@ -113,10 +115,10 @@ const App: React.FC = () => {
      
       <div className="flex flex-col md:flex-row gap-6 items-center">
         <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
-        {staticData && <OrderForm onSubmit={handleSubmit} staticData={staticData} />}
+        {staticData && <OrderForm onSubmit={handleSubmit} staticData={staticData} setSummary={setSummary} />}
         </div>
         <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
-        {dynamicData && <OrderSummary summary={summary} dynamicData={dynamicData}/>}
+        {dynamicData && <OrderSummary summary={summary} dynamicData={dynamicData} />}
         </div>
       </div>
     </div>

@@ -15,10 +15,17 @@ interface OrderFormProps {
           };
     }
   }
+   setSummary: React.Dispatch<React.SetStateAction<{
+      cartValue: number;
+      smallOrderSurcharge: number;
+      deliveryFee: number;
+      deliveryDistance: number;
+      totalPrice: number;
+  }>>;
 
 }
 
-const OrderForm: React.FC<OrderFormProps> = ({ onSubmit, staticData}) => {
+const OrderForm: React.FC<OrderFormProps> = ({ onSubmit, staticData, setSummary}) => {
   
 console.log("wo",staticData)
 
@@ -41,19 +48,35 @@ console.log(userLatitude, userLongitude)
 
 // Function to handle the onClick in get location
 const handleClick = () => {
-    const result = calculateLongLang(addLongAndLong)
-    if (result) {
-      console.log("User Latitude:", result.userLatitude);
-      console.log("User Longitude:", result.userLongitude);
-      setForm((prevForm) => ({
-        ...prevForm,
-        userLatitude: String(result.userLatitude),
-        userLongitude: String(result.userLongitude),
-      }));
+
+      if (!navigator.geolocation) {
+        setErrors({error:"Geolocation is not supported by your browser."});
+        return;
+      }
   
-    } else {
-       alert("Venue name does not match the expected value.");
-    }
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          console.log(latitude, longitude)
+          setForm((prevForm) => ({
+            ...prevForm,
+            userLatitude: String(latitude.toFixed(6)),
+            userLongitude: String(longitude.toFixed(6)),
+          }));
+          setErrors({});
+          setSummary({
+            cartValue: 0,
+            smallOrderSurcharge: 0,
+            deliveryFee: 0,
+            deliveryDistance: 0,
+            totalPrice: 0,
+          });
+        },
+        (err) => {
+          setErrors({error:"Unable to retrieve location. Please check permissions."});
+          console.error(err);
+        }
+      );
   };
 
 

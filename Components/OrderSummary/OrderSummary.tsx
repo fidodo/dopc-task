@@ -27,6 +27,7 @@ order_minimum_no_surcharge: number;
       };
 }
   }
+ 
 }
 
 const OrderSummary: React.FC<SummaryProps> = ({ summary, dynamicData }) => {
