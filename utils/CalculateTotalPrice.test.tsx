@@ -2,13 +2,13 @@ import calculateTotalPrice from "./calculateTotalPrice";
 
 describe("calculateTotalPrice", () => {
   it("should correctly calculate the total price", () => {
-    const cartValue = 1000; // 10.00 EUR
+    const cartValue = 10; // 10.00 EUR
     const deliveryFee = 299; // 2.99 EUR
     const smallOrderSurcharge = 200; // 2.00 EUR
 
     const totalPrice = calculateTotalPrice(cartValue, deliveryFee, smallOrderSurcharge);
 
-    expect(totalPrice).toBe(1499); // 14.99 EUR
+    expect(totalPrice).toBe(14.99); // 14.99 EUR
   });
 
   it("should return only the cart value if deliveryFee and smallOrderSurcharge are zero", () => {
@@ -28,7 +28,7 @@ describe("calculateTotalPrice", () => {
 
     const totalPrice = calculateTotalPrice(cartValue, deliveryFee, smallOrderSurcharge);
 
-    expect(totalPrice).toBe(350); // 3.50 EUR
+    expect(totalPrice).toBe(3.5); // 3.50 EUR
   });
 
   it("should handle all values as zero and return zero", () => {

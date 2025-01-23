@@ -111,7 +111,7 @@ export default function calculateOrderDetails(
 
   // Calculate delivery fee
   const deliveryFee = calculateDeliveryFee(deliveryDistance, base_price, distance_ranges);
-
+console.log(deliveryFee, smallOrderSurcharge)
   // Total price
   const totalPrice = calculateTotalPrice(cartValue, deliveryFee, smallOrderSurcharge);
 

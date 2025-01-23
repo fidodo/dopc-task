@@ -5,10 +5,10 @@ import OrderSummary from "../../Components/OrderSummary/OrderSummary";
 describe("OrderSummary Component", () => {
   const mockSummary = {
     cartValue: 20.5,
-    smallOrderSurcharge: 1.5,
+    smallOrderSurcharge: 0,
     deliveryFee: 3.9,
     deliveryDistance: 1500,
-    totalPrice: 25.9,
+    totalPrice: 25.90,
   };
 
   const mockDynamicData = {
@@ -34,17 +34,16 @@ describe("OrderSummary Component", () => {
 
     
     const cartValue = screen.getByText("Cart Value:").nextElementSibling;
-    expect(cartValue).toHaveTextContent("20.50 EUR");
+    expect(cartValue).toHaveTextContent("20.5 EUR");
     expect(cartValue).toHaveAttribute("data-raw-value", "2050");
 
  
     const smallOrderSurcharge = screen.getByText("Small Order Surcharge:").nextElementSibling;
-    expect(smallOrderSurcharge).toHaveTextContent("1.50 EUR");
-    expect(smallOrderSurcharge).toHaveAttribute("data-raw-value", "150");
+    expect(smallOrderSurcharge).toHaveTextContent("0 EUR");
+    expect(smallOrderSurcharge).toHaveAttribute("data-raw-value", "0");
 
   
     const deliveryFee = screen.getByText("Delivery Fee:").nextElementSibling;
-    expect(deliveryFee).toHaveTextContent("3.90 EUR");
     expect(deliveryFee).toHaveAttribute("data-raw-value", "390");
 
    

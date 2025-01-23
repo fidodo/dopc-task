@@ -43,13 +43,13 @@ const OrderSummary: React.FC<SummaryProps> = ({ summary, dynamicData }) => {
       </p>
       <p>
         <strong>Small Order Surcharge:</strong>{" "}
-        <span data-raw-value={summary.smallOrderSurcharge }  className="text-gray-700">
+        <span data-raw-value={summary.smallOrderSurcharge * 100}  className="text-gray-700">
           {Number(summary.smallOrderSurcharge.toFixed(2)) / 100} EUR
         </span>
       </p>
       <p>
         <strong>Delivery Fee:</strong>{" "}
-        <span data-raw-value={summary.deliveryFee}  className="text-gray-700">
+        <span data-raw-value={summary.deliveryFee * 100}  className="text-gray-700">
           {Number(summary.deliveryFee.toFixed(2)) / 100} EUR
         </span>
       </p>
@@ -59,7 +59,7 @@ const OrderSummary: React.FC<SummaryProps> = ({ summary, dynamicData }) => {
       </p>
       <p>
         <strong>Total Price:</strong>{" "}
-        <span data-raw-value={summary.totalPrice}>
+        <span data-raw-value={summary.totalPrice *100}>
           {(summary.totalPrice.toFixed(2)) } EUR
         </span>
       </p>

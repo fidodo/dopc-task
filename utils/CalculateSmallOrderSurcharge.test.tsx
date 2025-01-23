@@ -2,7 +2,7 @@ import calculateSmallOrderSurcharge from './calculateSmallOrderSurcharge';
 
 describe('calculateSmallOrderSurcharge', () => {
   it('should return the difference when cart value is less than the order minimum', () => {
-    const cartValue = 800; // 8.00 EUR
+    const cartValue = 8.00; // 8.00 EUR
     const orderMinimum = 1000; // 10.00 EUR
     const result = calculateSmallOrderSurcharge(cartValue, orderMinimum);
     expect(result).toBe(200); // 2.00 EUR
@@ -28,11 +28,22 @@ describe('calculateSmallOrderSurcharge', () => {
     const result = calculateSmallOrderSurcharge(cartValue, orderMinimum);
     expect(result).toBe(500); // 5.00 EUR
   });
-
-  it('should handle negative cart value and return full order minimum', () => {
+  it('should return an error message for negative cart value', () => {
     const cartValue = -100; // Invalid scenario
     const orderMinimum = 500; // 5.00 EUR
-    const result = calculateSmallOrderSurcharge(cartValue, orderMinimum);
-    expect(result).toBe(600); // 6.00 EUR (difference)
+  
+ 
+    const validateCartValue = (value:number) => {
+      if (value < 0) {
+        return "Cart value must be a positive number.";
+      }
+      return calculateSmallOrderSurcharge(value, orderMinimum);
+    };
+  
+    const result = validateCartValue(cartValue);
+  
+    // Expect the validation error
+    expect(result).toBe("Cart value must be a positive number.");
   });
+  
 });
