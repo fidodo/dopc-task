@@ -1,7 +1,17 @@
 import React from 'react';
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
+import Head from "next/head";
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+    <>
+    <Head>
+      <title>My Website</title>
+      <meta name="description" content="This is the default description for My Website." />
+    </Head>
+    
+  <Component {...pageProps} />
+  </>
+  );
 }

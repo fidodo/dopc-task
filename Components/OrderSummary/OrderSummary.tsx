@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 interface DistanceRange {
     min: number; 
@@ -15,6 +16,7 @@ interface SummaryProps {
     deliveryFee: number;
     deliveryDistance: number;
     totalPrice: number;
+    range:number
   };
   dynamicData: {
   venue_raw:{
@@ -27,15 +29,41 @@ order_minimum_no_surcharge: number;
       };
 }
   }
- 
+    setSummary: React.Dispatch<React.SetStateAction<{
+        cartValue: number;
+        smallOrderSurcharge: number;
+        deliveryFee: number;
+        deliveryDistance: number;
+        totalPrice: number;
+        range:number
+    }>>;
+    setErrorMessage: React.Dispatch<React.SetStateAction<string>>
+    errorMessage: string
 }
 
-const OrderSummary: React.FC<SummaryProps> = ({ summary, dynamicData }) => {
+const OrderSummary: React.FC<SummaryProps> = ({ summary, dynamicData, setSummary, errorMessage, setErrorMessage }) => {
+   const [isVisible, setIsVisible] = useState(true);
+ 
+ useEffect(() => {
+  if (summary.deliveryDistance > summary.range) {
+    setSummary({
+      cartValue: 0,
+      smallOrderSurcharge: 0,
+      deliveryFee: 0,
+      deliveryDistance: 0,
+      totalPrice: 0,
+      range: 0,
+    });
+    setErrorMessage("Delivery not possible: Distance exceeds available ranges.");
+    setIsVisible(true);
+  }
+}, [summary.deliveryDistance, summary.range, setSummary]);
     console.log(dynamicData)
 
     console.log("summary",summary)
   return (
     <div className="space-y-4">
+      {errorMessage && <ErrorMessage message={errorMessage} isVisible={isVisible} setIsVisible={setIsVisible}/>} 
       <p>
         <strong>Cart Value:</strong>{" "}
         <span data-raw-value={summary.cartValue * 100}  className="text-gray-700">

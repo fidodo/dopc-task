@@ -9,7 +9,11 @@ describe("OrderSummary Component", () => {
     deliveryFee: 3.9,
     deliveryDistance: 1500,
     totalPrice: 25.90,
+    range:2000
   };
+  const errorMessage = "Delivery not possible: Distance exceeds available ranges.";
+  const mockSetSummary = jest.fn();
+  const mockErrorMessage = jest.fn();
 
   const mockDynamicData = {
     venue_raw: {
@@ -30,7 +34,7 @@ describe("OrderSummary Component", () => {
   };
 
   it("renders the summary values correctly", () => {
-    render(<OrderSummary summary={mockSummary} dynamicData={mockDynamicData} />);
+    render(<OrderSummary summary={mockSummary} dynamicData={mockDynamicData} setSummary={mockSetSummary} setErrorMessage={mockErrorMessage} errorMessage={errorMessage}/>);
 
     
     const cartValue = screen.getByText("Cart Value:").nextElementSibling;
@@ -58,11 +62,11 @@ describe("OrderSummary Component", () => {
   });
 
   it("renders dynamic data correctly", () => {
-    render(<OrderSummary summary={mockSummary} dynamicData={mockDynamicData} />);
+    render(<OrderSummary summary={mockSummary} dynamicData={mockDynamicData} setSummary={mockSetSummary} setErrorMessage={mockErrorMessage} errorMessage={errorMessage} />);
 
     // Assert dynamicData structure in console logs
     console.log = jest.fn();
-    render(<OrderSummary summary={mockSummary} dynamicData={mockDynamicData} />);
+    render(<OrderSummary summary={mockSummary} dynamicData={mockDynamicData} setSummary={mockSetSummary} setErrorMessage={mockErrorMessage} errorMessage={errorMessage} />);
     expect(console.log).toHaveBeenCalledWith(mockDynamicData);
   });
 });

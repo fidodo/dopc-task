@@ -25,6 +25,7 @@ const App: React.FC = () => {
     deliveryFee: 0,
     deliveryDistance: 0,
     totalPrice: 0,
+    range:0
   });
 
 
@@ -42,7 +43,7 @@ const App: React.FC = () => {
   }
   console.log(addCartValueToDynamicData.cartValue)
 
-    const { smallOrderSurcharge, deliveryFee, deliveryDistance, totalPrice } =
+    const { smallOrderSurcharge, deliveryFee, deliveryDistance, totalPrice , range} =
     calculateOrderDetails( addCartValueToDynamicData)
     setSummary({
       cartValue: parseFloat(data.cartValue) || 0,
@@ -50,6 +51,7 @@ const App: React.FC = () => {
       deliveryFee,
       deliveryDistance,
       totalPrice,
+      range
     });
   };
 
@@ -118,7 +120,7 @@ const App: React.FC = () => {
         {staticData && <OrderForm onSubmit={handleSubmit} staticData={staticData} setSummary={setSummary} />}
         </div>
         <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
-        {dynamicData && <OrderSummary summary={summary} dynamicData={dynamicData} />}
+        {dynamicData && <OrderSummary summary={summary} dynamicData={dynamicData} setSummary={setSummary} errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>}
         </div>
       </div>
     </div>

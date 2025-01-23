@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { calculateLongLang } from "../../utils/calculateLongLang";
+
 interface OrderFormProps {
   onSubmit: (data: {
     venueSlug: string;
@@ -21,6 +21,7 @@ interface OrderFormProps {
       deliveryFee: number;
       deliveryDistance: number;
       totalPrice: number;
+      range:number
   }>>;
 
 }
@@ -41,10 +42,7 @@ console.log(userLatitude, userLongitude)
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const addLongAndLong = {
-    venue: form.venueSlug,
-    staticData
-}
+
 
 // Function to handle the onClick in get location
 const handleClick = () => {
@@ -70,6 +68,7 @@ const handleClick = () => {
             deliveryFee: 0,
             deliveryDistance: 0,
             totalPrice: 0,
+            range:0
           });
         },
         (err) => {
@@ -202,7 +201,7 @@ const handleClick = () => {
         {errors.userLongitude && <span className="text-red-500 text-sm">{errors.userLongitude}</span>}
       </div>
 
-      <button type="button" data-test-id="getLocation" className="w-full bg-green-500 text-white rounded-md p-2 hover:bg-blue-600"
+      <button type="button" data-test-id="getLocation" className="w-full bg-green-500 text-white rounded-md p-2 hover:bg-green-600"
       onClick={handleClick}
         >
         Get Location

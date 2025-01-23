@@ -10,7 +10,7 @@ export default function calculateDeliveryFee(
   distance: number,
   basePrice: number,
   distanceRanges: DistanceRange[]
-): number {
+): {deliveryFee: number; range: number} {
   console.log(distance, basePrice, distanceRanges, );
 
   const range = findDistanceRange(distance, distanceRanges);
@@ -33,6 +33,9 @@ export default function calculateDeliveryFee(
   const additionalFee = b * Math.round(distance / 10);
   console.log(additionalFee)
 
-  return basePrice + a + additionalFee;
+  return {
+    deliveryFee:basePrice + a + additionalFee,
+    range: range.max,
+  };
 }
 

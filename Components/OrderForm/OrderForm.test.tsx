@@ -5,6 +5,7 @@ import OrderForm from "../../Components/OrderForm/OrderForm";
 
 describe("OrderForm Component", () => {
   const mockOnSubmit = jest.fn();
+  const mockSetSummary = jest.fn()
 
   const mockStaticData = {
     venue_raw: {
@@ -20,7 +21,7 @@ describe("OrderForm Component", () => {
   });
 
   it("renders the form correctly", () => {
-    render(<OrderForm onSubmit={mockOnSubmit} staticData={mockStaticData} />);
+    render(<OrderForm onSubmit={mockOnSubmit} staticData={mockStaticData} setSummary={mockSetSummary} />);
 
     expect(screen.getByLabelText(/venue slug/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/cart value/i)).toBeInTheDocument();
@@ -29,7 +30,7 @@ describe("OrderForm Component", () => {
   });
 
   it("handles input changes correctly", () => {
-    render(<OrderForm onSubmit={mockOnSubmit} staticData={mockStaticData} />);
+    render(<OrderForm onSubmit={mockOnSubmit} staticData={mockStaticData} setSummary={mockSetSummary}/>);
 
     fireEvent.change(screen.getByTestId("venueSlug"), { target: { value: "Home Assignment Venue Helsinki" } });
     fireEvent.change(screen.getByTestId("cartValue"), { target: { value: "10.50" } });
@@ -43,7 +44,7 @@ describe("OrderForm Component", () => {
   });
 
   it("validates inputs and shows error messages", async () => {
-    render(<OrderForm onSubmit={mockOnSubmit} staticData={mockStaticData} />);
+    render(<OrderForm onSubmit={mockOnSubmit} staticData={mockStaticData} setSummary={mockSetSummary}/>);
 
     fireEvent.click(screen.getByTestId("calculate"));
 
@@ -56,7 +57,7 @@ describe("OrderForm Component", () => {
   });
 
   it("handles form submission correctly", async () => {
-    render(<OrderForm onSubmit={mockOnSubmit} staticData={mockStaticData} />);
+    render(<OrderForm onSubmit={mockOnSubmit} staticData={mockStaticData} setSummary={mockSetSummary}/>);
 
     fireEvent.change(screen.getByTestId("venueSlug"), { target: { value: "Home Assignment Venue Helsinki" } });
     fireEvent.change(screen.getByTestId("cartValue"), { target: { value: "10.50" } });
@@ -75,24 +76,44 @@ describe("OrderForm Component", () => {
     });
   });
 
-  it("handles Get Location click and updates latitude and longitude", async () => {
-    render(<OrderForm onSubmit={mockOnSubmit} staticData={mockStaticData} />);
+  it("handles Get Location click and updates latitude and longitude based on Geolocation API", async () => {
+    // Mock Geolocation API
+    const mockGeolocation = {
+      getCurrentPosition: jest.fn().mockImplementationOnce((success) =>
+        success({
+          coords: {
+            latitude: 60.20, 
+            longitude: 24.95, 
+          },
+        })
+      ),
+    };
   
-
-    fireEvent.change(screen.getByTestId("venueSlug"), {
-      target: { value: "Home Assignment Venue Helsinki" },
+   
+    Object.defineProperty(global.navigator, "geolocation", {
+      value: mockGeolocation,
+      writable: true,
     });
-    fireEvent.change(screen.getByTestId("cartValue"), {
-      target: { value: "1000" },
-    });
+  
+    render(
+      <OrderForm
+        onSubmit={mockOnSubmit}
+        staticData={mockStaticData}
+        setSummary={mockSetSummary}
+      />
+    );
   
 
     fireEvent.click(screen.getByTestId("getLocation"));
-
+ 
     await waitFor(() => {
-      expect(screen.getByTestId("userLatitude")).toHaveValue("60.17");
-      expect(screen.getByTestId("userLongitude")).toHaveValue("24.93");
+      expect(screen.getByTestId("userLatitude")).toHaveValue("60.200000"); 
+      expect(screen.getByTestId("userLongitude")).toHaveValue("24.950000"); 
     });
+  
+   
+    expect(mockGeolocation.getCurrentPosition).toHaveBeenCalledTimes(1);
   });
+  
   
 });

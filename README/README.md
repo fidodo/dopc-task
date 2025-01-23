@@ -80,6 +80,8 @@ Each formatted value is wrapped in an HTML element containing a `data-raw-value`
 - Total Price: `<span data-raw-value="1190">101.90 EUR</span>`
 
 ## Installation and Setup
+- unzip file downloaded
+- navigate to the folder in your terminal
 To run the application, you'll need to have Node.js installed on your machine. You can download
 it from the official Node.js website: <https://nodejs.org/en/download/>
 Once you have Node.js installed, you can install the required packages by running the following command in your
@@ -97,7 +99,14 @@ This will start the development server, and you can access the application in yo
 <http://localhost:3000>.
 
 # Manual testing the application
-On the Ui, you can input the values in the input fields, use "home-assignment-venue-helsinki" in the venue slug, Add cartvalue, it could be any number but not 0. The application will calculate and display the results. The GetLocation button has a function that is used to get the location of the user. The application also uses the Google Maps API to calculate the distance between the user's location and the venue. 
+
+
+On the Ui, you can input the values in the input fields, 
+- use "home-assignment-venue-helsinki" in the venue slug.
+-  Add cartvalue, it could be any number but not 0. 
+- Click the Get location button, The application will calculate and display the results. The GetLocation button has a function that is used to get the location of the user. The application also uses the Google Maps API to calculate the distance between the user's location and the venue. 
+- click on the button calculate
+- If the delivery is not possible, for example if the delivery distance is too long, the UI should shows error, with explanatory information
 
 # how to test using jest
 open another terminal and run the following command
