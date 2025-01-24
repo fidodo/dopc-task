@@ -150,6 +150,7 @@ const handleClick = () => {
         <input
           type="text"
           id="venueSlug"
+          placeholder="Enter venue slug"
           name="venueSlug"
           data-test-id="venueSlug"
           value={form.venueSlug}
@@ -164,6 +165,7 @@ const handleClick = () => {
         <input
           type="text"
           id="cartValue"
+            placeholder="Enter cart value"
           name="cartValue"
           data-test-id="cartValue"
           value={form.cartValue}
@@ -173,11 +175,18 @@ const handleClick = () => {
         {errors.cartValue && <span className="text-red-500 text-sm">{errors.cartValue}</span>}
       </div>
 
+      <button type="button" data-test-id="getLocation" className="w-full bg-green-700 text-white rounded-md p-2 hover:bg-green-800"
+      onClick={handleClick}
+        >
+        Get Location
+      </button>
+
       <div>
         <label htmlFor="userLatitude" className="block font-medium">User Latitude</label>
         <input
           type="text"
           id="userLatitude"
+            placeholder="Get location latitude"
           name="userLatitude"
           data-test-id="userLatitude"
           value={form.userLatitude}
@@ -192,6 +201,7 @@ const handleClick = () => {
         <input
           type="text"
           id="userLongitude"
+          placeholder="Get location longitude"
           name="userLongitude"
           data-test-id="userLongitude"
           value={form.userLongitude}
@@ -201,15 +211,11 @@ const handleClick = () => {
         {errors.userLongitude && <span className="text-red-500 text-sm">{errors.userLongitude}</span>}
       </div>
 
-      <button type="button" data-test-id="getLocation" className="w-full bg-green-500 text-white rounded-md p-2 hover:bg-green-600"
-      onClick={handleClick}
-        >
-        Get Location
-      </button>
+  
 
-      <button type="submit" data-test-id="calculate" className="w-full bg-blue-500 text-white rounded-md p-2 hover:bg-blue-600"
+      <button type="submit" data-test-id="calculate" className="w-full bg-blue-700 text-white rounded-md p-2 hover:bg-blue-800"
         >
-        Calculate
+      Calculate Price
       </button>
     </form>
   );

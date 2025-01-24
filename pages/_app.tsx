@@ -7,7 +7,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
     <Head>
-      <title>My Website</title>
+      <title>Ayokunle delivery order price calculate</title>
       <meta name="description" content="This is the default description for My Website." />
     </Head>
     

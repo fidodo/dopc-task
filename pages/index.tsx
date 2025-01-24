@@ -29,7 +29,7 @@ const App: React.FC = () => {
   });
 
 
-
+// function called when the form is submitted
   const handleSubmit = (data: typeof formData) => {
     
     setFormData(data);
@@ -55,7 +55,7 @@ const App: React.FC = () => {
     });
   };
 
-  
+  // Fetching static data
   const staticVenueUrl = "/api/static/";
   const loadStaticVenueData = useCallback(async () => {
     setIsLoading(true); 
