@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStore } from "@fortawesome/free-solid-svg-icons";
+import { faEuroSign } from "@fortawesome/free-solid-svg-icons";
+import { faMapPin } from "@fortawesome/free-solid-svg-icons";
+
 
 interface OrderFormProps {
   onSubmit: (data: {
@@ -28,11 +33,11 @@ interface OrderFormProps {
 
 const OrderForm: React.FC<OrderFormProps> = ({ onSubmit, staticData, setSummary}) => {
   
-console.log("wo",staticData)
+
 
     const userLatitude = staticData.venue_raw?.location.coordinates[1]
     const userLongitude = staticData.venue_raw?.location.coordinates[0]
-console.log(userLatitude, userLongitude)
+
   const [form, setForm] = useState({
     venueSlug: "",
     cartValue: "",
@@ -55,7 +60,7 @@ const handleClick = () => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          console.log(latitude, longitude)
+       
           setForm((prevForm) => ({
             ...prevForm,
             userLatitude: String(latitude.toFixed(6)),
@@ -73,7 +78,7 @@ const handleClick = () => {
         },
         (err) => {
           setErrors({error:"Unable to retrieve location. Please check permissions."});
-          console.error(err);
+      
         }
       );
   };
@@ -126,7 +131,7 @@ const handleClick = () => {
   
     return newErrors;
   };
-  console.log(form.venueSlug)
+
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -146,7 +151,8 @@ const handleClick = () => {
   return (
     <form onSubmit={handleSubmit} className="space-y-4" >
       <div>
-        <label  htmlFor="venueSlug"  className="block font-medium">Venue Slug</label>
+        <label  htmlFor="venueSlug"  className="block font-medium">Venue Slug <FontAwesomeIcon icon={faStore} className="text-blue-500 text-lg"/> </label>
+       
         <input
           type="text"
           id="venueSlug"
@@ -161,7 +167,7 @@ const handleClick = () => {
       </div>
 
       <div>
-        <label htmlFor="cartValue" className="block font-medium">Cart Value (EUR)</label>
+        <label htmlFor="cartValue" className="block font-medium">Cart Value   <FontAwesomeIcon icon={faEuroSign} className="text-blue-500 text-lg"/></label>
         <input
           type="text"
           id="cartValue"
@@ -182,7 +188,7 @@ const handleClick = () => {
       </button>
 
       <div>
-        <label htmlFor="userLatitude" className="block font-medium">User Latitude</label>
+        <label htmlFor="userLatitude" className="block font-medium">User Latitude  <FontAwesomeIcon icon={faMapPin} className="text-blue-500 text-lg" /></label>
         <input
           type="text"
           id="userLatitude"
@@ -197,7 +203,7 @@ const handleClick = () => {
       </div>
 
       <div>
-        <label htmlFor="userLongitude" className="block font-medium">User Longitude</label>
+        <label htmlFor="userLongitude" className="block font-medium">User Longitude <FontAwesomeIcon icon={faMapPin} className="text-blue-500 text-lg" /></label>
         <input
           type="text"
           id="userLongitude"

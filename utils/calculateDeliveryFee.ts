@@ -11,7 +11,7 @@ export default function calculateDeliveryFee(
   basePrice: number,
   distanceRanges: DistanceRange[]
 ): {deliveryFee: number; range: number} {
-  console.log(distance, basePrice, distanceRanges, );
+
 
   const range = findDistanceRange(distance, distanceRanges);
 
@@ -20,7 +20,7 @@ export default function calculateDeliveryFee(
   }
 
   const { a, b } = range;
-  console.log(a,b)
+
 
   if (b === undefined) {
     throw new Error("Invalid distance range: 'b' is undefined.");
@@ -30,12 +30,12 @@ export default function calculateDeliveryFee(
     throw new Error("Invalid distance range: 'b' is undefined.");
   }
 
-  const additionalFee = b * Math.round(distance / 10);
-  console.log(additionalFee)
+  const additionalFee = (b * Math.round(distance / 10));
+
 
   return {
     deliveryFee:basePrice + a + additionalFee,
-    range: range.max,
+    range: range.min,
   };
 }
 

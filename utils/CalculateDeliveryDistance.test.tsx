@@ -17,7 +17,7 @@ describe('calculateDistance (Helsinki)', () => {
     const lon2 = 24.9274;
 
     const result = calculateDistance(lat1, lon1, lat2, lon2);
-console.log(result)
+
     // Approximate distance in meters
     expect(result).toBeCloseTo(1859, -1); // 1.859 km
   });

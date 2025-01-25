@@ -63,17 +63,15 @@ const OrderSummary: React.FC<SummaryProps> = ({ summary, dynamicData, setSummary
     setIsVisible(true);
   }
 }, [summary.deliveryDistance, summary.range, setSummary]);
-    console.log(dynamicData)
-console.log(summary.deliveryDistance)
-console.log(summary.range)
-    console.log("summary",summary)
+   
+
   return (
     <div className="space-y-4  text-gray-700">
       {errorMessage && <ErrorMessage message={errorMessage} isVisible={isVisible} setIsVisible={setIsVisible}/>} 
       <div className="flex items-center justify-between">
       <div className="flex items-center space-x-2">
-      <FontAwesomeIcon icon={faCartShopping} className="text-blue-500 text-lg" />
-    <strong>Cart Value:</strong>{" "}
+      <FontAwesomeIcon icon={faCartShopping} className="text-blue-500 text-lg px-1" />
+    Cart Value:{" "}
     </div>
         <span data-raw-value={summary.cartValue * 100}  className="font-semibold">
           {Number(summary.cartValue.toFixed(2))} EUR
@@ -81,8 +79,8 @@ console.log(summary.range)
       </div>
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
-        <FontAwesomeIcon icon={faEuroSign} className="text-blue-500 text-lg"/>
-        <strong>Small Order Surcharge:</strong>{" "}
+        <FontAwesomeIcon icon={faEuroSign} className="text-blue-500 text-lg px-1"/>
+        {" "}Small Order Surcharge:
         </div>
         <span data-raw-value={summary.smallOrderSurcharge * 100}  className="font-semibold">
           {Number(summary.smallOrderSurcharge.toFixed(2)) / 100} EUR
@@ -90,8 +88,8 @@ console.log(summary.range)
       </div>
       <div className="flex items-center justify-between">
       <div className="flex items-center space-x-2">
-      <FontAwesomeIcon icon={faEuroSign} className="text-blue-500 text-lg"/>
-        <strong>Delivery Fee:</strong>{" "}
+      <FontAwesomeIcon icon={faEuroSign} className="text-blue-500 text-lg px-1"/>
+        Delivery Fee:{" "}
         </div>
         <span data-raw-value={summary.deliveryFee * 100}  className="font-semibold">
           {Number(summary.deliveryFee.toFixed(2)) / 100} EUR
@@ -99,8 +97,8 @@ console.log(summary.range)
       </div>
       <div className="flex items-center  justify-between">
       <div className="flex items-center space-x-2">
-      <FontAwesomeIcon icon={faRuler} className="text-blue-500 text-lg" />
-        <strong>Delivery Distance:</strong>{" "}
+      <FontAwesomeIcon icon={faRuler} className="text-blue-500 text-lg px-1" />
+        Delivery Distance:{" "}
         </div>
         <span data-raw-value={summary.deliveryDistance}  className="font-semibold">{summary.deliveryDistance.toFixed(2) } m</span>
       </div>
@@ -108,8 +106,8 @@ console.log(summary.range)
       <div className="flex justify-between text-lg font-bold text-blue-600">
       <div className="flex items-center space-x-2">
      
-      <FontAwesomeIcon icon={faClipboardList} className="text-blue-500 text-lg" />
-        <strong>Total Price:</strong>{" "}
+      <FontAwesomeIcon icon={faClipboardList} className="text-blue-500 text-lg px-1" />
+        Total Price:{" "}
         </div>
         <span data-raw-value={summary.totalPrice *100}>
           {(summary.totalPrice.toFixed(2)) } EUR
@@ -125,8 +123,3 @@ export default OrderSummary;
 
 
 
-{/* <FontAwesomeIcon icon="fa-solid fa-map-pin" />
-
-<FontAwesomeIcon icon="fa-solid fa-euro-sign" />
-<FontAwesomeIcon icon="fa-solid fa-truck" />
-<FontAwesomeIcon icon="fa-solid fa-store" /> */}

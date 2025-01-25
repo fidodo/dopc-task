@@ -14,12 +14,12 @@ const handleGetStaticVenueInfo: NextApiHandler = async (req, res) => {
 
 
     const staticVenueInfo = await response.json();
-   //console.log((staticVenueInfo))
+ 
 
 
     return res.status(200).json({staticVenueInfo});
   } catch (error) {
-    console.error("Error fetching staticVenueInfo:", error);
+ 
     return res
       .status(500)
       .json({ error: "Error fetching staticVenueInfo. Internal server error" });

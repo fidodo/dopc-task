@@ -51,7 +51,7 @@ export default function calculateOrderDetails(
   totalPrice: number;
   range:number
 } {
-  console.log(addCartValueToDynamicData);
+
 
 const myLocationLat = Number(addCartValueToDynamicData.userLatitude);
   const myLocationLon = Number(addCartValueToDynamicData.userLongitude);
@@ -60,7 +60,6 @@ const myLocationLat = Number(addCartValueToDynamicData.userLatitude);
   const deliveryDistance = calculateDistance(venueLat, venueLon, myLocationLat, myLocationLon);
   const cartValue = Number(addCartValueToDynamicData.cartValue);
 
-  console.log(cartValue);
 
   const { base_price, distance_ranges } =
     addCartValueToDynamicData.dynamicData.venue_raw.delivery_specs.delivery_pricing;
@@ -71,14 +70,11 @@ const myLocationLat = Number(addCartValueToDynamicData.userLatitude);
   const smallOrderSurcharge =
     cartValue > 0 ? calculateSmallOrderSurcharge(cartValue, orderMinimum) : 0;
 
-  console.log(smallOrderSurcharge);
-  console.log(orderMinimum, cartValue);
-  console.log(deliveryDistance);
-  console.log(myLocationLat, myLocationLon, venueLat, venueLon);
+ 
 
   // Calculate delivery fee
   const deliveryFee = calculateDeliveryFee(deliveryDistance, base_price, distance_ranges);
-console.log(deliveryFee.range, smallOrderSurcharge, deliveryFee)
+
   // Total price
   const totalPrice = calculateTotalPrice(cartValue, deliveryFee.deliveryFee, smallOrderSurcharge);
 

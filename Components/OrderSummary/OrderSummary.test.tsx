@@ -14,12 +14,13 @@ describe("OrderSummary Component", () => {
   const errorMessage = "Delivery not possible: Distance exceeds available ranges.";
   const mockSetSummary = jest.fn();
   const mockErrorMessage = jest.fn();
+  const mockSetErrorMessage = jest.fn();
 
   const mockDynamicData = {
     venue_raw: {
       delivery_specs: {
         delivery_pricing: {
-          base_price: 2,
+          base_price: 1.9,
           distance_ranges: [
             { min: 0, max: 500, a: 0, b: 0, flag: null },
             { min: 500, max: 1000, a: 100, b: 0, flag: null },
@@ -61,12 +62,65 @@ describe("OrderSummary Component", () => {
     expect(totalPrice).toHaveAttribute("data-raw-value", "2590");
   });
 
-  it("renders dynamic data correctly", () => {
-    render(<OrderSummary summary={mockSummary} dynamicData={mockDynamicData} setSummary={mockSetSummary} setErrorMessage={mockErrorMessage} errorMessage={errorMessage} />);
+  it("renders correct raw values in data-raw-value attributes", () => {
+    const mockErrorMessage = "";
+    render(
+      <OrderSummary
+        summary={mockSummary}
+        dynamicData={mockDynamicData}
+        setSummary={mockSetSummary}
+        setErrorMessage={mockSetErrorMessage}
+        errorMessage={mockErrorMessage}
+      />
+    );
+  
+    // Assert raw values for cart value, small order surcharge, delivery fee, and total price
+    expect(screen.getByText("20.5 EUR")).toHaveAttribute("data-raw-value", "2050");
+    expect(screen.getByText("0 EUR")).toHaveAttribute("data-raw-value", "0");
+    expect(screen.getByText("25.90 EUR")).toHaveAttribute("data-raw-value", "2590");
+    expect(screen.getByText("1500.00 m")).toHaveAttribute("data-raw-value", "1500");
+  });
+  
 
-    // Assert dynamicData structure in console logs
-    console.log = jest.fn();
-    render(<OrderSummary summary={mockSummary} dynamicData={mockDynamicData} setSummary={mockSetSummary} setErrorMessage={mockErrorMessage} errorMessage={errorMessage} />);
-    expect(console.log).toHaveBeenCalledWith(mockDynamicData);
+  it("handles distance exceeding range and sets error message", () => {
+    const customSummary = { ...mockSummary, deliveryDistance: 2500 };
+    const mockErrorMessage = "";
+    render(
+      <OrderSummary
+        summary={customSummary}
+        dynamicData={mockDynamicData}
+        setSummary={mockSetSummary}
+        setErrorMessage={mockSetErrorMessage}
+        errorMessage={mockErrorMessage}
+      />
+    );
+
+    // Assert that error message is set
+    expect(mockSetSummary).toHaveBeenCalledWith({
+      cartValue: 0,
+      smallOrderSurcharge: 0,
+      deliveryFee: 0,
+      deliveryDistance: 0,
+      totalPrice: 0,
+      range: 0,
+    });
+    expect(mockSetErrorMessage).toHaveBeenCalledWith(
+      "Delivery not possible: Distance exceeds available ranges."
+    );
+  });
+
+  it("does not show error message initially", () => {
+    const mockErrorMessage = "";
+    render(
+      <OrderSummary
+        summary={mockSummary}
+        dynamicData={mockDynamicData}
+        setSummary={mockSetSummary}
+        setErrorMessage={mockSetErrorMessage}
+        errorMessage={mockErrorMessage}
+      />
+    );
+
+    expect(screen.queryByText("Delivery not possible")).not.toBeInTheDocument();
   });
 });
