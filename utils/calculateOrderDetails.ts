@@ -20,7 +20,7 @@ interface VenueSpecs {
   order_minimum_no_surcharge: number;
 }
 
-interface StaticData {
+export interface StaticData {
   venue_raw: {
     location: {
       coordinates: [number, number];
@@ -28,11 +28,26 @@ interface StaticData {
   };
 }
 
-interface DynamicData {
+export interface DynamicData {
   venue_raw: {
     delivery_specs: VenueSpecs;
   };
 }
+
+export interface FormData {
+  venueSlug: string;
+    cartValue: string;
+    userLatitude: string;
+    userLongitude: string
+}
+
+export interface FormDataType {
+  venueSlug: string;
+  cartValue: string;
+  userLatitude: string;
+  userLongitude: string;
+}
+
 
 interface AddCartValueToDynamicData {
   staticData: StaticData;

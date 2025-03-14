@@ -1,7 +1,7 @@
 import React, { useState, useCallback,useEffect } from "react";
 import OrderForm from "../Components/OrderForm/OrderForm";
 import OrderSummary from "../Components/OrderSummary/OrderSummary";
-
+import { FormDataType } from "../utils/calculateOrderDetails";
 import calculateOrderDetails from "../utils/calculateOrderDetails"
 
 
@@ -11,12 +11,12 @@ const App: React.FC = () => {
   const [dynamicData, setDynamicData] = useState<null | any>(null);
   const [, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormDataType>({
     venueSlug: "",
     cartValue: "",
     userLatitude: "",
     userLongitude: "",
-  });
+  } as FormDataType);
 
 
   const [summary, setSummary] = useState({
@@ -71,7 +71,7 @@ const App: React.FC = () => {
 
       setStaticData(data.staticVenueInfo); 
     } catch (error) {
-  
+  console.log(error)
       setErrorMessage(`Error fetching data from ${staticVenueUrl}`);
     } finally {
       setIsLoading(false); 
@@ -92,7 +92,7 @@ const App: React.FC = () => {
   
       setDynamicData(data); 
     } catch (error) {
-
+console.log(error)
       setErrorMessage(`Error fetching data from ${staticVenueUrl}`);
     } finally {
       setIsLoading(false); 
@@ -125,7 +125,7 @@ const App: React.FC = () => {
       </div>
       <footer className="my-4 w-full">
       <div className="bg-gray-100 py-4 text-center">
-        <p className="text-gray-700">© 2025 ayokunle's Delivery App. All Rights Reserved.</p>
+        <p className="text-gray-700">© 2025 ayokunle&apos;s Delivery App. All Rights Reserved.</p>
         </div>
       <div className="absolute bottom-0 w-full overflow-hidden leading-none">
         <svg

@@ -15,7 +15,7 @@ const handleGetStaticVenueInfo: NextApiHandler = async (req, res) => {
    
     return res.status(200).json( dynamicVenueInfo);
   } catch (error) {
-
+console.log(error)
     return res
       .status(500)
       .json({ error: "Error fetching DynamicVenueInfo. Internal server error" });

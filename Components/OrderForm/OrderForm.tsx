@@ -31,12 +31,11 @@ interface OrderFormProps {
 
 }
 
-const OrderForm: React.FC<OrderFormProps> = ({ onSubmit, staticData, setSummary}) => {
+const OrderForm: React.FC<OrderFormProps> = ({ onSubmit, setSummary}) => {
   
 
 
-    const userLatitude = staticData.venue_raw?.location.coordinates[1]
-    const userLongitude = staticData.venue_raw?.location.coordinates[0]
+
 
   const [form, setForm] = useState({
     venueSlug: "",
@@ -77,6 +76,7 @@ const handleClick = () => {
           });
         },
         (err) => {
+          console.log(err);
           setErrors({error:"Unable to retrieve location. Please check permissions."});
       
         }

@@ -11,7 +11,7 @@ interface DistanceRange {
     max: number;
     a: number; 
     b: number; 
-    flag: null | any; 
+    flag: null | string; 
   }
 
 interface SummaryProps {
@@ -46,7 +46,7 @@ order_minimum_no_surcharge: number;
     errorMessage: string
 }
 
-const OrderSummary: React.FC<SummaryProps> = ({ summary, dynamicData, setSummary, errorMessage, setErrorMessage }) => {
+const OrderSummary: React.FC<SummaryProps> = ({ summary,  setSummary, errorMessage, setErrorMessage }) => {
    const [isVisible, setIsVisible] = useState(true);
  
  useEffect(() => {
@@ -62,7 +62,7 @@ const OrderSummary: React.FC<SummaryProps> = ({ summary, dynamicData, setSummary
     setErrorMessage("Delivery not possible: Distance exceeds available ranges.");
     setIsVisible(true);
   }
-}, [summary.deliveryDistance, summary.range, setSummary]);
+}, [summary.deliveryDistance, summary.range, setSummary, setErrorMessage]);
    
 
   return (
